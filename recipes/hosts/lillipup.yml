@@ -1,0 +1,39 @@
+---
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+name: lillipup
+description: Lenovo Chromebook.
+base-image: ghcr.io/secureblue/silverblue-main-hardened
+image-version: latest
+modules:
+  - type: signing
+  - type: files
+    files:
+      - source: system
+        destination: /
+  - type: rpm-ostree
+    repos:
+      - https://copr.fedorainfracloud.org/coprs/pgdev/ghostty/repo/fedora-%OS_VERSION%/pgdev-ghostty-fedora-%OS_VERSION%.repo
+      - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%OS_VERSION%/atim-starship-fedora-%OS_VERSION%.repo
+    install:
+      - helix
+      - ghostty
+      - starship
+  - type: chezmoi
+    repository: "https://github.com/rosyskill23/dotfiles"
+  - type: default-flatpaks
+    notify: true
+    user:
+      repo-name: flathub
+      repo-title: "Flathub (user)"
+      repo-url: https://dl.flathub.org/repo/flathub.flatpakrepo
+      install:
+        - org.gnome.Boxes
+        - org.gnome.Firmware
+        - org.gnome.Showtime
+        - org.gnome.World.Secrets
+        - com.belmoussaoui.Decoder
+        - com.belmoussaoui.Obfuscate
+        - org.gnome.World.PikaBackup
+        - org.localsend.localsend_app
+        - io.github.flattool.Ignition
+        - com.belmoussaoui.Authenticator
