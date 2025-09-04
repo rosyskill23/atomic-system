@@ -26,7 +26,7 @@ jobs:
           - hosts/lillipup.yml
     steps:
       - name: Build Custom Image
-        uses: blue-build/github-action@v1.8
+        uses: blue-build/github-action@v1.9
         with:
           maximize_build_space: true
           recipe: ${{ matrix.recipe }}
